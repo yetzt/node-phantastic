@@ -11,6 +11,6 @@
     "phantomjs": "^1.9.17",
     "request": "^2.58.0",
     "tmp": "0.0.26",
-    "valid-url": "*"
+    "valid-url": "^1.0.9"
   }
 }
