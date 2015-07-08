@@ -5,7 +5,15 @@ retrieve a list of resources for a website
 ## usage example
 
 ``` javascript
-var phantastic = require("./phantastic.js")();
+var phantastic = require("phantastic")({
+	cache: {
+		// see https://npmjs.com/package/lru-files
+		dir: "/path/to/cache/dir",
+		files: 100,
+		size: "1 GB",
+		age: "1 Day"
+	}
+});
 
 // fetch single site
 phantastic.fetch("https://www.example.com/", function(err, data){

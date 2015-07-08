@@ -1,12 +1,14 @@
 {
   "private": true,
   "name": "phantastic",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "get a list of website resources via phantomjs",
   "main": "phantastic.js",
   "author": "yetzt <node@yetzt.me> (https://yetzt.me/)",
   "license": "Public Domain",
   "dependencies": {
+    "debug": "^2.2.0",
+    "lru-files": "0.0.4",
     "moment": "^2.10.3",
     "phantomjs": "^1.9.17",
     "request": "^2.58.0",
