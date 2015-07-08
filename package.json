@@ -1,6 +1,6 @@
 {
   "name": "phantastic",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "get a list of website resources via phantomjs",
   "main": "phantastic.js",
   "author": "yetzt <node@yetzt.me> (https://yetzt.me/)",
