@@ -1,10 +1,20 @@
 {
-  "private": true,
   "name": "phantastic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "get a list of website resources via phantomjs",
   "main": "phantastic.js",
   "author": "yetzt <node@yetzt.me> (https://yetzt.me/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yetzt/node-phantastic.git"
+  },
+  "keywords": [
+    "phantomjs",
+    "phantastic",
+    "scraper",
+    "website",
+    "resources"
+  ],
   "license": "Public Domain",
   "dependencies": {
     "debug": "^2.2.0",

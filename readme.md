@@ -1,6 +1,6 @@
 # phantastic
 
-retrieve a list of resources for a website
+get a list of website resources via phantomjs
 
 ## usage example
 
