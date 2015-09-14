@@ -11,6 +11,7 @@ var validurl = require("valid-url");
 var request = require("request");
 var crypto = require("crypto");
 var moment = require("moment");
+var cookie = require("cookie");
 var debug = require("debug")("phantastic");
 var tmp = require("tmp");
 
@@ -74,6 +75,20 @@ phantastic.prototype._cache = function(h, data, fn){
 	fn(null);
 };
 
+// evaluate cookies
+phantastic.prototype._cookies = function(cookies) {
+	if (cookies === null) return null;
+	return cookies.map(function(c){
+		n = c.replace(/^([^=]+)=.*$/,'$1');
+		c = cookie.parse(c);
+		return {
+			name: n,
+			size: c[n].length,
+			valid: moment(c.expires, "ddd, DD-MMM-YYYY HH:mm:ss Z").diff(moment(), "days")
+		};
+	});
+};
+
 phantastic.prototype.fetch = function(u, fn){
 	var self = this;
 
@@ -124,6 +139,7 @@ phantastic.prototype.fetch = function(u, fn){
 };
 
 phantastic.prototype._fetch = function(u, fn){
+	var self = this;
 
 	// check url
 	u = (validurl.is_web_uri(u));
@@ -163,16 +179,19 @@ phantastic.prototype._fetch = function(u, fn){
 				}
 			
 				// refine data
+				var cookiecount = 0;
 				data = data.filter(function(item){
 					// filter items without response or non-200 status code
 					return (item.status === 200 && item.response === true);
 				}).map(function(item){
+					if (item.cookies !== null) cookiecount += item.cookies.length;
 					return {
 						url: item.url,
 						domain: url.parse(item.url, false).host,
 						size: (item.size) ? item.size : null,
 						time: Math.abs(moment(item.start).valueOf()-moment(item.end).valueOf()),
 						content: (item.contenttype) ? item.contenttype.split(/;/g).shift() : null,
+						cookies: self._cookies(item.cookies)
 					}
 				});
 
@@ -181,6 +200,7 @@ phantastic.prototype._fetch = function(u, fn){
 					url: u,
 					domain: url.parse(u, false).host,
 					data: data,
+					numcookies: cookiecount,
 					screenshot: file_screenshot
 				});
 			

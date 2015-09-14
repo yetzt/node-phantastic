@@ -43,6 +43,14 @@ page.onResourceReceived = function (response) {
 	resources[response.id].url = response.url;
 	if (response.contentType) resources[response.id].contenttype = response.contentType;
 	if (response.bodySize) resources[response.id].size = response.bodySize;
+
+	// add cookies to resources
+	resources[response.id].cookies = response.headers.filter(function(header){
+		return (header.name.toLowerCase() === "set-cookie");
+	}).map(function(item){
+		return item.value;
+	}).join("\n").split(/[\r\n]+/g);
+	if (resources[response.id].cookies.length === 1 && resources[response.id].cookies[0] === '') resources[response.id].cookies = null;
 };
 
 page.open(url, function (status) {

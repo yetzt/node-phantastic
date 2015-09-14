@@ -38,7 +38,12 @@ data is an array of resource object. they look like this
 	domain: 'www.example.org',
 	size: 2440,
 	time: 87,
-	content: 'mime/type' 
+	content: 'mime/type',
+	cookies: [{
+		name: "Some-Cookie",
+		size: 1024,
+		valid: 356
+	}]
 }]
 ```
 
